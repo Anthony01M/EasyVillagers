@@ -191,7 +191,7 @@ public class TableManager {
         try (ScanResult scanResult = new ClassGraph()
                 .enableClassInfo()
                 .enableAnnotationInfo()
-                .whitelistPackages("xyz.berrystudios.essentials.database.model")
+                .whitelistPackages("xyz.berrystudios.easyvillagers.database.model")
                 .scan()) {
             scanResult.getClassesWithAnnotation(Table.class.getName()).forEach(classInfo -> {
                 try {
