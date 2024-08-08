@@ -1,0 +1,87 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'io.freefair.lombok' version '8.6'
+}
+
+group = 'xyz.berrystudios'
+version = '1.0'
+
+repositories {
+    maven {
+        name = "spigotmc-repo"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        name = "ACF"
+        url = "https://repo.aikar.co/content/groups/aikar/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+    maven {
+        name = "InvUI"
+        url = "https://repo.xenondevs.xyz/releases"
+    }
+    mavenCentral()
+    flatDir {
+        dirs("libs")
+    }
+}
+
+dependencies {
+    implementation "xyz.xenondevs.invui:invui:1.34"
+    implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
+    implementation "org.jetbrains:annotations:24.1.0"
+    implementation "com.zaxxer:HikariCP:5.1.0"
+    implementation "com.fasterxml.jackson.core:jackson-core:2.11.2"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.11.2"
+    implementation 'org.apache.commons:commons-lang3:3.15.0'
+    implementation 'io.github.classgraph:classgraph:4.8.134'
+    implementation 'com.mojang:authlib:1.5.25'
+
+    compileOnly "org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT"
+    compileOnly "packetevents-latest:packetevents-latest"
+}
+
+def targetJavaVersion = 17
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+shadowJar {
+    archiveFileName.set("EASYVILLAGERS-${project.version}.jar")
+    relocate 'co.aikar.commands', 'xyz.berrystudios.easyvillagers.shaded.acf'
+    relocate 'org.intellij', 'xyz.berrystudios.easyvillagers.shaded.intellij'
+    relocate 'org.apache.commons.lang3', 'xyz.berrystudios.easyvillagers.shaded.commons.lang3'
+    dependencies {
+        exclude(dependency("org.jetbrains:annotations"))
+    }
+}
+
+build {
+    dependsOn shadowJar
+}

@@ -1,0 +1,13 @@
+prefix: "§6EasyVillagers §7» §f"
+
+database:
+  type: "SQLITE"
+  host: "localhost"
+  port: 3306
+  database: "easyvillagers"
+  username: "root"
+  password: "password"
+
+craftable:
+  farmer: true
+  ironfarm: true
