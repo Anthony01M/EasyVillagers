@@ -22,10 +22,14 @@ public class ConfigFile extends AbstractFile {
     @Load(path = "database.password")
     public String database_password;
 
-    @Load(path = "craftable.farmer")
+    @Load(path = "craftable.farmer.enabled")
     public boolean craftable_farmer;
-    @Load(path = "craftable.ironfarm")
+    @Load(path = "craftable.farmer.recipes")
+    public String craftable_farmer_recipes;
+    @Load(path = "craftable.ironfarm.enabled")
     public boolean craftable_ironfarm;
+    @Load(path = "craftable.ironfarm.recipes")
+    public String craftable_ironfarm_recipes;
 
     @Override
     public Object getValue(String path, YamlLoader loader, Class<?> type) {

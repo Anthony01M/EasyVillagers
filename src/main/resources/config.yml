@@ -9,5 +9,15 @@ database:
   password: "password"
 
 craftable:
-  farmer: true
-  ironfarm: true
+  farmer:
+    enabled: true
+    recipes: |-
+      GLASS_PANE GLASS_PANE GLASS_PANE
+      GLASS_PANE WATER GLASS_PANE
+      IRON_INGOT DIRT IRON_INGOT
+  ironfarm:
+    enabled: true
+    recipes: |-
+      GLASS_PANE GLASS_PANE GLASS_PANE
+      GLASS_PANE LAVA GLASS_PANE
+      IRON_INGOT ZOMBIE_SPAWN_EGG IRON_INGOT

@@ -22,10 +22,8 @@ public class FarmerRecipe implements CustomRecipe {
         }
         NamespacedKey key = new NamespacedKey(easyVillagers, "farmer_recipe");
         ShapedRecipe recipe = new ShapedRecipe(key, result);
-        recipe.shape("AAA", "ABA", "CDC");
-        recipe.setIngredient('A', Material.GLASS_PANE);
-        recipe.setIngredient('B', Material.WATER);
-        recipe.setIngredient('C', Material.IRON_INGOT);
-        recipe.setIngredient('D', Material.DIRT);
+        recipe.shape("ABC", "DEF", "GHI");
+        String recipes = EasyVillagers.getInstance().getCfile().craftable_farmer_recipes;
+        recipes(easyVillagers, recipe, recipes);
     }
 }
