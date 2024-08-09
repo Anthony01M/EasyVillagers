@@ -3,6 +3,8 @@ A plugin based on the [EasyVillager](https://www.curseforge.com/minecraft/mc-mod
 
 > THIS PLUGIN IS STILL IN DEVELOPMENT AND IS NOT YET READY FOR USE.
 
+> This is ALPHA version of the plugin, only coding with no testing being done. 
+
 ## Features
 *todo*
 
