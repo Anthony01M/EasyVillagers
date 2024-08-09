@@ -12,11 +12,13 @@ public class Craft {
     private final String title;
     private final Material material;
     private final String[] loreLines;
+    private final String recipePattern;
 
-    public Craft(String title, Material material, String[] loreLines) {
+    public Craft(String title, Material material, String[] loreLines, String recipePattern) {
         this.title = title;
         this.material = material;
         this.loreLines = loreLines;
+        this.recipePattern = recipePattern;
     }
 
     public void open(Player player) {
@@ -30,9 +32,9 @@ public class Craft {
         Gui gui = Gui.normal()
                 .setStructure(
                         "# # # # # # # # #",
-                        "# . . . # # # # #",
-                        "# . . . # # * # #",
-                        "# . . . # # # # #",
+                        "# 1 2 3 # # # # #",
+                        "# 4 5 6 # # * # #",
+                        "# 7 8 9 # # # # #",
                         "# # # # # # # # #",
                         "0 0 0 0 < 0 0 0 0"
                 )
@@ -42,6 +44,8 @@ public class Craft {
                 .addIngredient('<', backButton)
                 .build();
 
+        populateRecipe(gui);
+
         Window window = Window.single()
                 .setViewer(player)
                 .setTitle(title)
@@ -49,5 +53,14 @@ public class Craft {
                 .build();
 
         window.open();
+    }
+
+    private void populateRecipe(Gui gui) {
+        String[] ingredients = recipePattern.split(" ");
+        for (int i = 0; i < ingredients.length; i++) {
+            Material material = Material.getMaterial(ingredients[i]);
+            if (material != null)
+                gui.setItem(i + 1, new SimpleItem(new ItemBuilder(material).setDisplayName("§f" + material.name())));
+        }
     }
 }

@@ -2,6 +2,7 @@ package xyz.berrystudios.easyvillagers.gui.types.craft;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import xyz.berrystudios.easyvillagers.EasyVillagers;
 import xyz.berrystudios.easyvillagers.gui.types.Craft;
 
 public class FarmerCraft {
@@ -16,7 +17,7 @@ public class FarmerCraft {
                 "§7"
         };
 
-        Craft craft = new Craft(title, material, loreLines);
+        Craft craft = new Craft(title, material, loreLines, EasyVillagers.getInstance().getCfile().craftable_farmer_recipes);
         craft.open(player);
     }
 }

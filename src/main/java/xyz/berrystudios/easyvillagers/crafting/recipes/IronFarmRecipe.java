@@ -9,8 +9,6 @@ import org.bukkit.persistence.PersistentDataType;
 import xyz.berrystudios.easyvillagers.EasyVillagers;
 import xyz.berrystudios.easyvillagers.crafting.CustomRecipe;
 
-import java.util.Objects;
-
 public class IronFarmRecipe implements CustomRecipe {
     @Override
     public void register(EasyVillagers easyVillagers) {
